@@ -44,6 +44,14 @@ public class userController {
         this.service.save(user);
         return new RestResponse(HttpStatus.OK.value(), "Se ha registrado el usuario");
     }
+    
+    @RequestMapping(value = "/deleteUserviaPost", method = RequestMethod.POST)
+    public RestResponse deleteUser(@RequestBody String userJson) throws IOException{
+        this.mapper = new ObjectMapper();
+        User user = this.mapper.readValue(userJson, User.class);
+        this.service.delete(user);
+        return new RestResponse(HttpStatus.OK.value(), "El usuario ha sido eliminado exitosamente");
+    }
 
     @RequestMapping(value = "/getUsers", method = RequestMethod.GET)
     public List<User> getUsers() {
